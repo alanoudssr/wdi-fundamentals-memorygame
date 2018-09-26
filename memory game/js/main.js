@@ -116,6 +116,7 @@ var flipCard = function() {
 	} else {
 //this alert box displays when the player has already gotten a result and continues to click on the cards
 	alert("Play Again!");
+	window.location.reload();
 	 };
 	};
 
