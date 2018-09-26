@@ -1,4 +1,5 @@
 
+
 //creates cards array and stores cards objects into it
 
 var cards = [
@@ -26,10 +27,10 @@ var cards = [
 
 var cardsInPlay = [];
 
-/*if uncommented: creates a shuffle function that will change 
-the cards placement every time the board is created 
+// creates a shuffle function that will change 
+// the cards placement every time the board is created 
 
-function shuffle(a) {
+var shuffle = function(a) {
     var j, x, i;
     for (i = a.length - 1; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
@@ -39,7 +40,7 @@ function shuffle(a) {
     }
     return a;
 }
-*/
+
 
 
 /* checks whether the cards match or not
@@ -83,28 +84,54 @@ message is displayed, which is something the alert box prevented*/
 	};
 };
 
+
+//this function is to show the card when hovered over
+
+var flipFront = function() {
+	var cardId = this.getAttribute('data-id');
+	this.setAttribute('src',cards[cardId].cardImage);
+
+};
+
+//this function is to reverse the hoverover action
+var flipBack = function() {
+	if (this.getAttribute('id') === '1'){
+	this.setAttribute('src','images/back.png');
+};
+};
+
 //flips card when clicked and calls the checkForMatch function
 
 var flipCard = function() {
+	if (cardsInPlay.length < 2){
 	var cardId = this.getAttribute('data-id');
 	console.log("User flipped "+cards[cardId].rank)
 	cardsInPlay.push(cards[cardId].rank);
 	console.log(cards[cardId].cardImage);
 	console.log(cards[cardId].suit);
 	this.setAttribute('src',cards[cardId].cardImage);
+	this.setAttribute('id','0')
 	if (cardsInPlay.length === 2){	
 	checkForMatch(); };
+	} else {
+//this alert box displays when the player has already gotten a result and continues to click on the cards
+	alert("Play Again!");
+	 };
 	};
 
 //creates the board of cards everytime the page is loaded
 
 var createBoard = function(){
-	/*if uncommented calls the shuffle function before creating the board
-	shuffle(cards); */
+	// calls the shuffle function before creating the board
+	shuffle(cards); 
 	for (var i = 0; i < cards.length; i++) {
 var cardElement = document.createElement('img');
 cardElement.setAttribute('src','images/back.png');
 cardElement.setAttribute('data-id',i);
+cardElement.setAttribute('id','1');
+//the player hovers over a card to find the solution
+cardElement.addEventListener('mouseover',flipFront);
+cardElement.addEventListener('mouseout',flipBack);
 cardElement.addEventListener('click',flipCard);
 document.getElementById('game-board').appendChild(cardElement);
 };
