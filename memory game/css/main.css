@@ -13,7 +13,7 @@ h1 {
 	font-weight: 400;
 }
 
-h2 {
+h2, .winning{
 	text-transform: uppercase;
 	font-family: "Raleway", sans-serif;
 	letter-spacing: 1px;

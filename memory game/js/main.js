@@ -1,5 +1,5 @@
 
-//create cards array and store cards objects into it
+//creates cards array and stores cards objects into it
 
 var cards = [
 {
@@ -26,7 +26,7 @@ var cards = [
 
 var cardsInPlay = [];
 
-/*if uncommented: create sa shuffle function that will change 
+/*if uncommented: creates a shuffle function that will change 
 the cards placement every time the board is created 
 
 function shuffle(a) {
@@ -42,7 +42,8 @@ function shuffle(a) {
 */
 
 
-//checks whether the cards match or not
+/* checks whether the cards match or not
+also, stores & displays number of times the game has won */
 
 var checkForMatch = function(){
 	var scoreMessage = document.getElementById('resultMessage');
@@ -51,10 +52,22 @@ var checkForMatch = function(){
 
 /* if a simple alert box is wanted to display the result 
 message this code could be uncommented:
-alert("You found a match!"); */
+alert("Sou found a match!"); */
 
 		scoreMessage.innerHTML="You found a match!";
+
+//this code is for storing the winning score in the browser storage		
+		var re;
+		if (sessionStorage.getItem('score')===null){
+		sessionStorage.setItem('score',1);
+		re = sessionStorage.getItem('score');}
+		else {
+		re = parseInt(sessionStorage.getItem('score'))+1;
+sessionStorage.setItem('score',re);
+	};
+		scoreCount.innerHTML=re;
 	   document.getElementById('scoreBlock').appendChild(scoreMessage); 
+	   document.getElementById('numberOfWins').appendChild(scoreCount); 
 	}
 	else {
 
